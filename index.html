@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тобі, моє сонечко ❤️</title>
+    <style>
+        .photo-frame {
+    width: 100%;
+    max-width: 300px; 
+    margin: 0 auto 20px auto;
+    border: 8px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: rotate(-3deg); 
+    transition: transform 0.5s;
+}
+
+.photo-frame:hover {
+    transform: rotate(0deg) scale(1.05); 
+}
+
+.photo-frame img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+        :root {
+            --main-pink: #ff4d6d;
+            --soft-pink: #fff0f3;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--soft-pink);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            z-index: 10;
+            max-width: 90%;
+        }
+
+        h1 {
+            color: var(--main-pink);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .heart-btn {
+            background-color: var(--main-pink);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.1);
+            background-color: #ff758f;
+        }
+
+        /* Анімація сердечок */
+        .heart {
+            position: absolute;
+            color: var(--main-pink);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        #message {
+            display: none;
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--main-pink);
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="photo-frame">
+    <img src="me.jpg" alt="Бусі"> 
+    </div>
+        <h1>З Днем Святого Валентина! ❤️</h1>
+        <p>Ти — найпрекрасніше, що сталося в моєму житті. <br> Натисни на кнопку, щоб дізнатися секрет.</p>
+        
+        <button class="heart-btn" onclick="revealSecret()">Натисни мене</button>
+        
+        <div id="message">
+            Я тебе дуже сильно кохаю! ❤️ <br>
+            Давай сьогодні зробимо цей вечір особливим?
+        </div>
+    </div>
+
+    <script>
+        // Функція створення літаючих сердечок
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-5vh';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Запуск дощу з сердечок
+        setInterval(createHeart, 300);
+
+        function revealSecret() {
+            const msg = document.getElementById('message');
+            msg.style.display = 'block';
+            
+            // Додаємо більше сердечок при натисканні
+            for(let i=0; i<20; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
